@@ -10,34 +10,28 @@ function getComputerChoice() {
     }
 }
 
-let playerScore = 0
-let computerScore = 0
-let roundWinner = ''
-
 function playRound(playerSelection, computerSelection) {
+    const playerVictory = `You win! ${capitalize(playerSelection)} beats ${capitalize(computerSelection)}.`
+    const computerVictory = `You lost! ${capitalize(computerSelection)} beats ${capitalize(playerSelection)}.`
+    
     if (playerSelection === computerSelection) {
-        roundWinner = 'tie'
+        return `It's a tie`
     } else if ((playerSelection === 'rock' && computerSelection === 'scissors') ||
                (playerSelection === 'paper' && computerSelection === 'rock') ||
                (playerSelection === 'scissors' && computerSelection === 'paper')) {
-                playerScore ++
-                roundWinner = 'player'         
+                return playerVictory;
     } else if ((playerSelection === 'rock' && computerSelection === 'paper') ||
                (playerSelection === 'paper' && computerSelection === 'scissors') ||
                (playerSelection === 'scissors' && computerSelection === 'rock')) {
-                computerScore ++
-                roundWinner = 'computer'
-               }
-    updateScoreMessage (roundWinner, playerSelection, computerSelection)
+                return computerVictory;
+    }
 }
 
-
-
-function gameOver() {
-    return playerScore === 5 || computerScore === 5
+function capitalize(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase()
 }
 
-const playerSelection = 'rock';
+const playerSelection = prompt('Rock, paper ot scissors?').toLowerCase();
 const computerSelection = getComputerChoice();
-console.log(playRound(playerSelection, computerSelection));
+console.log(playRound(playerSelection, computerSelection))
 
